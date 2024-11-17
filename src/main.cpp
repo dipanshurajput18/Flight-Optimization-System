@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Graph.h"
 
+using namespace std;
+
 int main() {
     Graph flightGraph;
 
@@ -10,7 +12,7 @@ int main() {
     flightGraph.addEdge("Delhi", "Kolkata", 2000.75);
 
     // Printing the graph
-    std::cout << "Flight Routes:" << std::endl;
+    cout << "Flight Routes:" << endl;
     flightGraph.printGraph();
 
     return 0;

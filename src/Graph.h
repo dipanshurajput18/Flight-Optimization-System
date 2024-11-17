@@ -8,14 +8,16 @@
 #include <string>
 #include <limits>
 
+using namespace std;
+
 class Graph {
 private:
     // Adjacency list to store the graph
-    std::unordered_map<std::string, std::list<std::pair<std::string, double>>> adjList;
+    unordered_map<string, list<pair<string, double>>> adjList;
 
 public:
     // Add an edge to the graph
-    void addEdge(const std::string& source, const std::string& destination, double weight);
+    void addEdge(const string& source, const string& destination, double weight);
 
     // Print the graph
     void printGraph();
