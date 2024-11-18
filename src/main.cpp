@@ -15,5 +15,9 @@ int main() {
     cout << "Flight Routes:" << endl;
     flightGraph.printGraph();
 
+      // Finding shortest path using Dijkstra's Algorithm
+    cout << "\nFinding shortest path:" << endl;
+    flightGraph.dijkstra("Delhi", "Chennai");
+
     return 0;
 }

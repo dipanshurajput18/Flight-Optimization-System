@@ -7,6 +7,8 @@
 #include <list>
 #include <string>
 #include <limits>
+#include <queue>
+#include <set>
 
 using namespace std;
 
@@ -19,8 +21,12 @@ public:
     // Add an edge to the graph
     void addEdge(const string& source, const string& destination, double weight);
 
+    // Dijkstras Algorithm to find shortest path between source to destination
+    void dijkstra(const string& source, const string& destination);
+
     // Print the graph
     void printGraph();
+
 };
 
 #endif
