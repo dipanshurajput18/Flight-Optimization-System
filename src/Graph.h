@@ -24,6 +24,9 @@ public:
     // Dijkstras Algorithm to find shortest path between source to destination
     void dijkstra(const string& source, const string& destination);
 
+    // Bellmon's Ford Algorithm
+    void bellmanFord(const string& source, const string& destination);
+
     // Print the graph
     void printGraph();
 

@@ -88,3 +88,77 @@ void Graph::dijkstra(const string& source, const string& destination) {
 
     cout << "Total cost: " << distances[destination] << endl;
 }
+
+void Graph::bellmanFord(const string& source, const string& destination) {
+    unordered_map<string, double> distances;
+    unordered_map<string, string> parent;
+
+    // Initialize distances to infinity and parent to empty
+    for (const auto& node : adjList) {
+        distances[node.first] = numeric_limits<double>::infinity();
+        parent[node.first] = "";
+    }
+    distances[source] = 0; // Distance to source is 0
+
+    // Relax all edges |V| - 1 times
+    for (size_t i = 1; i < adjList.size(); ++i) {
+        for (const auto& node : adjList) {
+            for (const auto& neighbor : node.second) {
+                const string& u = node.first;
+                const string& v = neighbor.first;
+                double weight = neighbor.second;
+
+                if (distances[u] != numeric_limits<double>::infinity() &&
+                    distances[u] + weight < distances[v]) {
+                    distances[v] = distances[u] + weight;
+                    parent[v] = u;
+                }
+            }
+        }
+    }
+
+    // Check for negative weight cycles
+    for (const auto& node : adjList) {
+        for (const auto& neighbor : node.second) {
+            const string& u = node.first;
+            const string& v = neighbor.first;
+            double weight = neighbor.second;
+
+            if (distances[u] != numeric_limits<double>::infinity() &&
+                distances[u] + weight < distances[v]) {
+                cout << "Graph contains a negative weight cycle!" << endl;
+                return;
+            }
+        }
+    }
+
+    // Output the shortest path to the destination
+    cout << "Shortest path from " << source << " to " << destination << ":" << endl;
+
+    if (distances[destination] == numeric_limits<double>::infinity()) {
+        cout << "No path exists." << endl;
+        return;
+    }
+
+    vector<string> path;
+    string temp = destination;
+
+    while (temp != source && temp != "") {
+        path.push_back(temp);
+        temp = parent[temp];
+    }
+    if (temp == "") {
+        cout << "No path exists." << endl;
+        return;
+    }
+    path.push_back(source);
+
+    // Reverse and print the path
+    reverse(path.begin(), path.end());
+    for (const auto& node : path) {
+        cout << node << " ";
+    }
+    cout << endl;
+
+    cout << "Total cost: " << distances[destination] << endl;
+}
